@@ -24,9 +24,7 @@ let save = (repo) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
-  console.log('outside the if', repo);
   if (repo) {
-  console.log('inside the if', repo);
   	var repo = new Repo({
 	  	repoId: repo.id,
 	  	userName: repo.owner.login,
@@ -34,11 +32,23 @@ let save = (repo) => {
 	  	repoUrl: repo.html_url,
 	  	stars: repo.stargazers_count
 	  });
-
   	repo.save(repo);
   }	
 }
 
+let find = (callback) => {
+
+	Repo.find().limit(25).sort('-stars')
+		.then(results => { 
+			return callback(null, results);
+			//(results)
+			})
+		.catch(err => {console.error(err)
+			});
+  // return callback(Repo.find().limit(25).sort('-stars'));
+
+}
 
 
 module.exports.save = save;
+module.exports.find = find;

@@ -16,8 +16,8 @@ let getReposByUsername = (username, callback) => {
   };
 
   request(options, function(err, res, body) {
-    console.log("LOOK HERE!!!", JSON.parse(body));
-    console.log('maybe error?', err);
+    // console.log("LOOK HERE!!!", JSON.parse(body));
+    // console.log('maybe error?', err);
     if (err) {
       callback(err, null);
     } else {
