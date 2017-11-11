@@ -13,7 +13,7 @@ class App extends React.Component {
   this.componentDidMount = this.componentDidMount.bind(this);  
   }
 
-  doWork() {
+  doWork(data) {
     $.ajax({
       type: 'GET',
       url: '/repos'
@@ -46,7 +46,7 @@ class App extends React.Component {
       type: 'POST',
       url: '/repos',
       data: {'username': term},
-      success: this.doWork()
+      success: this.doWork.bind(this)
     });
   }
 

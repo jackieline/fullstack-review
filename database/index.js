@@ -20,7 +20,7 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (repo) => {
+let save = (repo, callback) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
@@ -32,7 +32,13 @@ let save = (repo) => {
 	  	repoUrl: repo.html_url,
 	  	stars: repo.stargazers_count
 	  });
-  	repo.save(repo);
+  	repo.save(function(err, repo) {
+  		if (err) {
+  			console.error(err);
+  		} else {
+  			callback(repo);
+  		}
+  	});
   }	
 }
 

@@ -22,11 +22,18 @@ app.post('/repos', function (req, res) {
 			res.end();
 		} else {
 			results.forEach(function(repo) {
-				database.save(repo)
+				database.save(repo, function(err, results) {
+					if (err) {
+						console.log('this is a save error', err);
+					} else {
+						console.log('entry that was saved', results);
+					}
+				});
 				// console.log(repo.owner.login);
 				// repo.owner.login, repo.name, repo.html_url, repo.stargazers_count
-				res.end();
+				
 			});
+			res.end();
 		}
 	});
 		
